@@ -1,0 +1,89 @@
+﻿[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2628 modules transformed.
+node.exe : [31mx[39m 
+Build failed in 2.61s
+At C:\Program 
+Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE 
+$NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (  
+  [31mx[39m Build fail   
+ ed in 2.61s:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+[31merror during build:
+[31msrc/components/Guided
+Tour.tsx (3:7): "default" 
+is not exported by "node_m
+odules/react-joyride/dist/
+index.mjs", imported by "s
+rc/components/GuidedTour.t
+sx".[31m
+file: [36mC:/zorvyn/src/c
+omponents/GuidedTour.tsx:3
+:7[31m
+[33m
+1: import React from 
+'react';
+2: // @ts-ignore
+3: import Joyride, { Step 
+} from 'react-joyride';
+          ^
+4: import { 
+useFinanceStore } from '..
+/store/useFinanceStore';
+[31m
+    at getRollupError (fil
+e:///C:/zorvyn/node_module
+s/rollup/dist/es/shared/pa
+rseAst.js:406:41)
+    at error (file:///C:/z
+orvyn/node_modules/rollup/
+dist/es/shared/parseAst.js
+:402:42)
+    at Module.error (file:
+///C:/zorvyn/node_modules/
+rollup/dist/es/shared/node
+-entry.js:17380:16)
+    at 
+Module.traceVariable (file
+:///C:/zorvyn/node_modules
+/rollup/dist/es/shared/nod
+e-entry.js:17813:29)
+    at 
+ModuleScope.findVariable (
+file:///C:/zorvyn/node_mod
+ules/rollup/dist/es/shared
+/node-entry.js:15403:39)
+    at ReturnValueScope.fi
+ndVariable (file:///C:/zor
+vyn/node_modules/rollup/di
+st/es/shared/node-entry.js
+:5676:38)
+    at FunctionBodyScope.f
+indVariable (file:///C:/zo
+rvyn/node_modules/rollup/d
+ist/es/shared/node-entry.j
+s:5676:38)
+    at Identifier.bind (fi
+le:///C:/zorvyn/node_modul
+es/rollup/dist/es/shared/n
+ode-entry.js:5450:40)
+    at 
+CallExpression.bind (file:
+///C:/zorvyn/node_modules/
+rollup/dist/es/shared/node
+-entry.js:2828:28)
+    at 
+CallExpression.bind (file:
+///C:/zorvyn/node_modules/
+rollup/dist/es/shared/node
+-entry.js:12512:15)[39m

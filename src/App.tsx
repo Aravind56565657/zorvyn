@@ -11,7 +11,7 @@ function App() {
     <div className="min-h-screen bg-transparent pb-20">
       <Header />
 
-      <main className="container mx-auto px-4 md:px-6 py-6 md:py-8 max-w-[1400px]">
+      <main className="container mx-auto px-6 py-8 max-w-[1400px]">
         <div className="flex flex-col mb-8">
           <h2 className="font-bricolage text-3xl font-bold text-text1 dark:text-[#F3F4F6]">Financial Overview</h2>
           <p className="text-sm text-text2 dark:text-[#9CA3AF] mt-1">Track your income, expenses, and savings seamlessly.</p>

@@ -132,7 +132,42 @@ export const TransactionsTable: React.FC = () => {
       </div>
 
       <div className="overflow-x-auto bg-white dark:bg-[#131A2A]">
-        <table className="w-full text-left">
+        {/* Mobile View: Card Layout */}
+        <div className="md:hidden flex flex-col divide-y divide-border1 dark:divide-[#1F2937]">
+          {paginatedData.length > 0 ? (
+            paginatedData.map((tx) => (
+              <div key={tx.id} className="p-4 flex flex-col gap-2 hover:bg-base/50 dark:hover:bg-[#1F2937]/50 transition-colors">
+                <div className="flex justify-between items-start">
+                  <div className="flex flex-col">
+                    <p className="text-sm font-medium text-text1 dark:text-[#F3F4F6]">{tx.description}</p>
+                    <span className="text-xs text-text2 dark:text-[#9CA3AF] mt-0.5">{format(parseISO(tx.date), 'MMM dd, yyyy')} • {tx.category}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className={clsx("font-mono font-medium block", tx.type === 'income' ? 'text-green' : 'text-text1 dark:text-[#F3F4F6]')}>
+                      {tx.type === 'income' ? '+' : '-'}{formatINR(tx.amount)}
+                    </span>
+                  </div>
+                </div>
+
+                {role === 'Admin' && (
+                  <div className="flex justify-end gap-3 mt-2 pt-3 border-t border-border1/50 dark:border-[#1F2937]/50">
+                    <button onClick={() => { setEditingTx(tx); setIsModalOpen(true); }} className="text-text3 hover:text-[#5B6AF0] flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 bg-[#F3F4F6] dark:bg-[#1F2937] rounded-lg">
+                      <Edit2 size={12} /> Edit
+                    </button>
+                    <button onClick={() => deleteTransaction(tx.id)} className="text-text3 hover:text-red flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 bg-[#F3F4F6] dark:bg-[#1F2937] rounded-lg">
+                      <Trash2 size={12} /> Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+             <div className="p-6 text-center text-sm text-text3 dark:text-[#6B7280]">No records found.</div>
+          )}
+        </div>
+
+        {/* Desktop View: Standard Table */}
+        <table className="hidden md:table w-full text-left">
           <thead className="bg-[#F7F8FC] dark:bg-[#0B0F19] border-b border-[#E8EAF0] dark:border-[#1F2937]">
             <tr>
               <th className="px-6 py-3 text-xs font-semibold text-text2 dark:text-[#9CA3AF] uppercase tracking-wide cursor-pointer hover:text-text1 dark:hover:text-[#F3F4F6]" onClick={() => handleSort('date')}>Date</th>

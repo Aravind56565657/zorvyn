@@ -84,6 +84,7 @@ export const Header: React.FC = () => {
             </button>
 
             <button
+              id="tour-auth-toggle"
               onClick={handleRoleToggle}
               className={clsx(
                 "pill cursor-pointer transition-colors border flex items-center gap-1.5 px-3 py-1.5",

@@ -26,6 +26,7 @@ interface Filters {
 interface FinanceState {
   transactions: Transaction[];
   role: Role;
+  hasSeenTour: boolean;
   theme: 'light' | 'dark';
   filters: Filters;
   setRole: (role: Role) => void;
@@ -35,6 +36,7 @@ interface FinanceState {
   setFilter: (key: keyof Filters, value: string) => void;
   clearFilters: () => void;
   toggleTheme: () => void;
+  completeTour: () => void;
 }
 
 const generateMockData = (): Transaction[] => {
@@ -84,6 +86,7 @@ export const useFinanceStore = create<FinanceState>()(
     (set) => ({
       transactions: mockTransactions,
       role: 'Viewer',
+      hasSeenTour: false,
       theme: 'light',
       filters: {
         search: '',
@@ -111,6 +114,7 @@ export const useFinanceStore = create<FinanceState>()(
       toggleTheme: () => set((state) => ({
         theme: state.theme === 'light' ? 'dark' : 'light'
       })),
+      completeTour: () => set({ hasSeenTour: true }),
     }),
     {
       name: 'finflow-storage-v4',

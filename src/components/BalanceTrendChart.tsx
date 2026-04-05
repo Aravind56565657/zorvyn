@@ -34,7 +34,7 @@ export const BalanceTrendChart: React.FC = () => {
   }, [transactions]);
 
   return (
-    <div className="card h-[400px] flex flex-col">
+    <div id="tour-trends" className="card h-[400px] flex flex-col">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h3 className="font-bricolage text-lg font-bold text-text1 dark:text-[#F3F4F6]">Balance Trend</h3>

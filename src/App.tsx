@@ -1,4 +1,5 @@
 import { Header } from './components/Header';
+import { GuidedTour } from './components/GuidedTour';
 import { SummaryCards } from './components/SummaryCards';
 import { BalanceTrendChart } from './components/BalanceTrendChart';
 import { SpendingPieChart } from './components/SpendingPieChart';
@@ -9,6 +10,7 @@ import { AddTransactionModal } from './components/AddTransactionModal';
 function App() {
   return (
     <div className="min-h-screen bg-transparent pb-20">
+      <GuidedTour />
       <Header />
 
       <main className="container mx-auto px-6 py-8 max-w-[1400px]">

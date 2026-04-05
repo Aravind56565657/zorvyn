@@ -79,7 +79,7 @@ export const TransactionsTable: React.FC = () => {
   const categories = ['All', 'Food', 'Transport', 'Shopping', 'Utilities', 'Healthcare', 'Entertainment', 'Salary', 'Freelance'];
 
   return (
-    <div className="card p-0 flex flex-col mb-12 overflow-hidden shadow-sm">
+    <div id="tour-ledger" className="card p-0 flex flex-col mb-12 overflow-hidden shadow-sm">
       <div className="p-5 border-b border-border1 dark:border-[#1F2937] bg-white dark:bg-[#131A2A]">
         <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
           <div className="flex items-center gap-2">
@@ -87,7 +87,7 @@ export const TransactionsTable: React.FC = () => {
             <span className="pill bg-base dark:bg-[#0B0F19] text-text2 dark:text-[#9CA3AF] border border-border1 dark:border-[#1F2937] ml-2">{displayedData.length} records</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div id="tour-export" className="flex items-center gap-3">
             {role === 'Admin' && (
               <button
                 onClick={() => { setEditingTx(null); setIsModalOpen(true); }}

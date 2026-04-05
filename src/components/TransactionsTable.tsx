@@ -56,11 +56,21 @@ export const TransactionsTable: React.FC = () => {
       headers.join(','),
       ...displayedData.map(t => `${t.date},"${t.description}",${t.category},${t.type},${t.amount}`)
     ].join('\n');
-
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.setAttribute('download', 'transactions_export.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportJSON = () => {
+    const jsonContent = JSON.stringify(displayedData, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'transactions_export.json');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -90,7 +100,10 @@ export const TransactionsTable: React.FC = () => {
               <Filter size={14} /> <span className="hidden sm:inline">Clear</span>
             </button>
             <button onClick={handleExport} className="btn-ghost flex items-center justify-center gap-2 cursor-pointer">
-              <Download size={14} /> <span className="hidden sm:inline">Export</span>
+              <Download size={14} /> <span className="hidden sm:inline">CSV</span>
+            </button>
+            <button onClick={handleExportJSON} className="btn-ghost flex items-center justify-center gap-2 cursor-pointer">
+              <Download size={14} /> <span className="hidden sm:inline">JSON</span>
             </button>
           </div>
         </div>

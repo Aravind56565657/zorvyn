@@ -10,6 +10,14 @@
 
 ---
 
+## 🔑 Demo Access Credentials
+In order to fully evaluate the entire system architecture (including the "Administrator Control Center" layout and full ledger CRUD mutations), you must authenticate. 
+
+**Locate the "Viewer Mode" toggle in the top-right navigation header and enter the master override key:**
+> **Password:** `admin123`
+
+---
+
 ## ✨ System Architecture & Features
 
 This dashboard was engineered specifically to transcend standard MVPs by integrating high-fidelity UX patterns alongside robust, scalable state management architectures.

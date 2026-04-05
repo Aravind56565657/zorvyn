@@ -62,7 +62,7 @@ export const SpendingPieChart: React.FC = () => {
   const total = data.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
-    <div className="card h-[400px] flex flex-col relative">
+    <div className="card h-auto sm:h-[400px] flex flex-col relative overflow-hidden">
       <div className="mb-2 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
         <div>
           <h3 className="font-bricolage text-lg font-bold text-text1 dark:text-[#F3F4F6]">Expenses by Category</h3>
@@ -97,7 +97,7 @@ export const SpendingPieChart: React.FC = () => {
 
       {data.length > 0 ? (
         <>
-          <div className="flex-1 w-full min-h-0 relative -mt-2">
+          <div className="h-[250px] sm:h-auto sm:flex-1 w-full min-h-0 relative -mt-2">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <defs>
@@ -110,8 +110,8 @@ export const SpendingPieChart: React.FC = () => {
                   data={data}
                   cx="50%"
                   cy="50%"
-                  innerRadius={60}
-                  outerRadius={90}
+                  innerRadius="50%"
+                  outerRadius="80%"
                   paddingAngle={6}
                   dataKey="value"
                   stroke="transparent"
@@ -136,7 +136,7 @@ export const SpendingPieChart: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 justify-center">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2 sm:mt-4 justify-center pb-2 sm:pb-0">
             {data.slice(0, 4).map((d) => (
               <div key={d.name} className="flex items-center gap-1.5 text-xs">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: CATEGORY_COLORS[d.name] || FALLBACK_COLOR }}></span>

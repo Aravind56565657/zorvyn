@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFinanceStore } from '../store/useFinanceStore';
 import clsx from 'clsx';
-import { LayoutDashboard, ReceiptText, PieChart, LineChart, Moon, Sun, Lock, Plus } from 'lucide-react';
+import { LayoutDashboard, ReceiptText, PieChart, LineChart, Moon, Sun, Lock, Plus, User, Hexagon } from 'lucide-react';
 import { AuthModal } from './AuthModal';
 import { TransactionModal } from './TransactionModal';
 
@@ -42,7 +42,9 @@ export const Header: React.FC = () => {
       <header className="bg-white dark:bg-[#131A2A] border-b border-border1 dark:border-[#1F2937] h-16 sticky top-0 z-30 transition-colors duration-200">
         <div className="container mx-auto px-6 h-full flex items-center justify-between max-w-[1400px]">
           <div className="flex items-center gap-3">
-            <div className={clsx("w-8 h-8 rounded-md shadow-sm transition-colors", role === 'Admin' ? 'bg-[#16A34A]' : 'bg-[#5B6AF0]')}></div>
+            <div className={clsx("w-8 h-8 rounded-[10px] shadow-sm transition-colors flex items-center justify-center", role === 'Admin' ? 'bg-[#16A34A]' : 'bg-[#5B6AF0]')}>
+              <Hexagon size={18} className="text-white fill-white/20" />
+            </div>
             <div className="flex flex-col justify-center">
               <h1 className="font-bricolage font-bold text-text1 dark:text-[#F3F4F6] leading-none text-lg">FinFlow</h1>
               <span className="text-[10px] text-text3 dark:text-[#9CA3AF] font-medium uppercase tracking-wider">
@@ -92,10 +94,10 @@ export const Header: React.FC = () => {
             </button>
             
             <div className={clsx(
-              "w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-white cursor-pointer transition-all",
+              "w-8 h-8 rounded-full text-white flex items-center justify-center font-bold text-sm shadow-sm ring-2 ring-white dark:ring-[#1F2937] cursor-pointer transition-all",
               role === 'Admin' ? 'bg-[#16A34A] hover:ring-[#DCFCE7]' : 'bg-[#5B6AF0] hover:ring-[#EEF0FE]'
             )}>
-              AK
+              <User size={16} />
             </div>
           </div>
         </div>

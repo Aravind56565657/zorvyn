@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFinanceStore } from '../store/useFinanceStore';
 import clsx from 'clsx';
-import { LayoutDashboard, ReceiptText, PieChart, LineChart, Moon, Sun, Lock } from 'lucide-react';
+import { LayoutDashboard, ReceiptText, PieChart, LineChart, Moon, Sun, Lock, Plus } from 'lucide-react';
 import { AuthModal } from './AuthModal';
+import { TransactionModal } from './TransactionModal';
 
 export const Header: React.FC = () => {
   const { role, setRole, theme, toggleTheme } = useFinanceStore();
-  const [activeTab, setActiveTab] = React.useState('overview');
-  const [isAuthOpen, setIsAuthOpen] = React.useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
@@ -100,28 +102,38 @@ export const Header: React.FC = () => {
       </header>
       
       {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#131A2A]/90 backdrop-blur-lg border-t border-border1 dark:border-[#1F2937] flex justify-around items-center px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
-        {[
-          { id: 'overview', label: 'Home', icon: <LayoutDashboard size={20} /> },
-          { id: 'insights', label: 'Trends', icon: <LineChart size={20} /> },
-          { id: 'reports', label: 'Stats', icon: <PieChart size={20} /> },
-          { id: 'transactions', label: 'Ledger', icon: <ReceiptText size={20} /> },
-        ].map(item => (
-          <button
-            key={item.id}
-            onClick={() => handleNav(item.id)}
-            className={clsx(
-              "flex flex-col items-center justify-center gap-1 w-16 h-14 rounded-xl transition-all cursor-pointer",
-              activeTab === item.id 
-                ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20")
-                : "text-[#9CA3AF] hover:text-[#6B7280] dark:hover:text-[#D1D5DB]"
-            )}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#131A2A]/90 backdrop-blur-lg border-t border-border1 dark:border-[#1F2937] flex justify-around items-center px-2 py-3 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
+        <button onClick={() => handleNav('overview')} className={clsx("flex flex-col items-center justify-center gap-1 w-14 h-14 rounded-xl transition-all", activeTab === 'overview' ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20") : "text-[#9CA3AF]")}>
+          <LayoutDashboard size={20} /> <span className="text-[10px] font-bold">Home</span>
+        </button>
+        
+        <button onClick={() => handleNav('insights')} className={clsx("flex flex-col items-center justify-center gap-1 w-14 h-14 rounded-xl transition-all", activeTab === 'insights' ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20") : "text-[#9CA3AF]")}>
+          <LineChart size={20} /> <span className="text-[10px] font-bold">Trends</span>
+        </button>
+        
+        {role === 'Admin' && (
+          <button 
+            onClick={() => setIsAddModalOpen(true)}
+            className="flex items-center justify-center -mt-8 bg-[#16A34A] text-white w-[60px] h-[60px] rounded-full shadow-[0_4px_15px_rgba(22,163,74,0.4)] ring-4 ring-white dark:ring-[#131A2A] z-10 cursor-pointer hover:scale-105 transition-transform"
           >
-            {item.icon}
-            <span className="text-[10px] font-bold">{item.label}</span>
+            <Plus size={30} />
           </button>
-        ))}
+        )}
+
+        <button onClick={() => handleNav('reports')} className={clsx("flex flex-col items-center justify-center gap-1 w-14 h-14 rounded-xl transition-all", activeTab === 'reports' ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20") : "text-[#9CA3AF]")}>
+          <PieChart size={20} /> <span className="text-[10px] font-bold">Stats</span>
+        </button>
+        
+        <button onClick={() => handleNav('transactions')} className={clsx("flex flex-col items-center justify-center gap-1 w-14 h-14 rounded-xl transition-all", activeTab === 'transactions' ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20") : "text-[#9CA3AF]")}>
+          <ReceiptText size={20} /> <span className="text-[10px] font-bold">Ledger</span>
+        </button>
       </nav>
+
+      <TransactionModal 
+        isOpen={isAddModalOpen} 
+        onClose={() => setIsAddModalOpen(false)} 
+        editingTx={null} 
+      />
 
       <AuthModal 
         isOpen={isAuthOpen} 

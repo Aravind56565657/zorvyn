@@ -99,6 +99,30 @@ export const Header: React.FC = () => {
         </div>
       </header>
       
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#131A2A]/90 backdrop-blur-lg border-t border-border1 dark:border-[#1F2937] flex justify-around items-center px-4 py-3 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_-4px_20px_rgba(0,0,0,0.2)]">
+        {[
+          { id: 'overview', label: 'Home', icon: <LayoutDashboard size={20} /> },
+          { id: 'insights', label: 'Trends', icon: <LineChart size={20} /> },
+          { id: 'reports', label: 'Stats', icon: <PieChart size={20} /> },
+          { id: 'transactions', label: 'Ledger', icon: <ReceiptText size={20} /> },
+        ].map(item => (
+          <button
+            key={item.id}
+            onClick={() => handleNav(item.id)}
+            className={clsx(
+              "flex flex-col items-center justify-center gap-1 w-16 h-14 rounded-xl transition-all cursor-pointer",
+              activeTab === item.id 
+                ? (role === 'Admin' ? "text-[#16A34A] bg-[#DCFCE7] dark:bg-[#16A34A]/20" : "text-[#5B6AF0] bg-[#EEF0FE] dark:bg-[#5B6AF0]/20")
+                : "text-[#9CA3AF] hover:text-[#6B7280] dark:hover:text-[#D1D5DB]"
+            )}
+          >
+            {item.icon}
+            <span className="text-[10px] font-bold">{item.label}</span>
+          </button>
+        ))}
+      </nav>
+
       <AuthModal 
         isOpen={isAuthOpen} 
         onClose={() => setIsAuthOpen(false)} 

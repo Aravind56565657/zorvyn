@@ -82,11 +82,11 @@ export const Header: React.FC = () => {
             <button 
               onClick={handleRoleToggle}
               className={clsx(
-                "pill cursor-pointer transition-colors border hidden sm:flex items-center gap-2",
+                "pill cursor-pointer transition-colors border flex items-center gap-1.5 px-3 py-1.5",
                 role === 'Admin' ? "bg-[#DCFCE7] dark:bg-[#16A34A]/20 text-[#16A34A] border-[#DCFCE7]/50 dark:border-[#16A34A]/30" : "bg-[#F7F8FC] dark:bg-[#0B0F19] text-[#6B7280] dark:text-[#9CA3AF] border-[#E8EAF0] dark:border-[#1F2937]"
               )}
             >
-              {role === 'Admin' ? 'Admin Mode' : <><Lock size={12} /> Viewer Mode</>}
+              {role === 'Admin' ? <span className="text-xs sm:text-sm font-medium">Admin Mode</span> : <><Lock size={12} /> <span className="text-xs sm:text-sm font-medium">Viewer Mode</span></>}
             </button>
             
             <div className={clsx(

@@ -41,22 +41,29 @@ const generateMockData = (): Transaction[] => {
   const categories: Category[] = ['Food', 'Transport', 'Shopping', 'Utilities', 'Healthcare', 'Entertainment'];
   const res: Transaction[] = [];
   
+  // Deterministic Pseudo-Random Number Generator so every browser sees identical data
+  let seed = 12345;
+  const random = () => {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+  
   // Fixed seed logic so the dummy data looks structured
   for (let i = 0; i < 150; i++) {
     const start = new Date('2024-01-01').getTime();
     const end = new Date('2026-04-10').getTime();
-    const d = new Date(start + Math.random() * (end - start));
+    const d = new Date(start + random() * (end - start));
     const dateStr = d.toISOString().split('T')[0];
     
-    const isIncome = Math.random() > 0.85; // 85% expenses, 15% income
+    const isIncome = random() > 0.85; // 85% expenses, 15% income
     const type: TransactionType = isIncome ? 'income' : 'expense';
     
     // realistic rounding
     const amount = isIncome 
-      ? Math.floor((50000 + Math.random() * 50000) / 100) * 100 
-      : Math.floor((200 + Math.random() * 9000) / 50) * 50;
+      ? Math.floor((50000 + random() * 50000) / 100) * 100 
+      : Math.floor((200 + random() * 9000) / 50) * 50;
       
-    const category: Category = isIncome ? 'Salary' : categories[Math.floor(Math.random() * categories.length)];
+    const category: Category = isIncome ? 'Salary' : categories[Math.floor(random() * categories.length)];
     
     res.push({
       id: `t_mock_${i}`,
@@ -76,7 +83,7 @@ export const useFinanceStore = create<FinanceState>()(
   persist(
     (set) => ({
       transactions: mockTransactions,
-      role: 'Admin',
+      role: 'Viewer',
       theme: 'light',
       filters: {
         search: '',
@@ -106,7 +113,11 @@ export const useFinanceStore = create<FinanceState>()(
       })),
     }),
     {
-      name: 'finflow-storage-v3',
+      name: 'finflow-storage-v4',
+      partialize: (state) => {
+        const { role, ...rest } = state;
+        return rest;
+      }
     }
   )
 );
